@@ -1,20 +1,15 @@
-import sys, itertools
+import sys, itertools, math
 
-def primeTable(n):
-    sieve = [1 for _ in xrange(n + 1)]
-    sys.exit(0)
-    i = 2
-    while i * i <= n:
-        if sieve[i]:
-            j = i + i
-            while j <= n:
-                sieve[j] = False
-                j += i
-        if i%100 == 0:
-            print i
-        i += 1
-    table = [i for i in xrange(n + 1) if sieve[i] and i >= 2]
-    return table
-#123456789
-#999999999
-primeList = primeTable(999999990)
+def isPrime(n):
+    for i in xrange(2, math.sqrt(n)+1):
+        if n%i == 0:
+            return False
+    return True
+res = [0]
+for l in xrange(1, len('123456789') + 1):
+    for p in itertools.permutations('123456789'[:l]):
+        p = ''.join(p)
+        if isPrime(int(p)):
+            res.append(int(p))
+
+print sorted(res)[-1]
