@@ -13,5 +13,6 @@ for p in itertools.permutations(base):
     target = [e1, e2, e3, e4, e5, e6, e7]
     if trueList == map(lambda x:x[0]%x[1] == 0, zip(target, sieve)):
         res += int(eval_num)
+    if len(res) > 2:
 
 print res
