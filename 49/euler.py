@@ -6,7 +6,7 @@ class Prime:
     def __init__(self):
         self.source = 0
         self.primePerms = []
-
+sys.exit(0)
 toEval = filter(lambda x:x>1000, basic.primeTable(10000))
 primeList = []
 for to_eval in toEval:

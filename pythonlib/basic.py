@@ -11,3 +11,12 @@ def primeTable(n):
         i += 1
     table = [i for i in xrange(n + 1) if sieve[i] and i >= 2]
     return table
+
+def getFactrial(n):
+    result = 1
+    for i in xrange(1,n+1):
+        result *= i
+    return result
+
+def getCombinationNum(n, r):
+    return getFactrial(n)/( getFactrial(r)*getFactrial(n - r) )
