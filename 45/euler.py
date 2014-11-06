@@ -29,7 +29,7 @@ def hexagonalGenerator():
         yield g*(2*g-1)
         g += 1
 
-for h in hexagonalGenerator():
+for i, h in enumerate(hexagonalGenerator()):
     if isTriangle(h) and isPentagonal(h):
         print h, isTriangle(h)
         if 40755 < h:
