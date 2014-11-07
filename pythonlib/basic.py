@@ -20,3 +20,11 @@ def getFactrial(n):
 
 def getCombinationNum(n, r):
     return getFactrial(n)/( getFactrial(r)*getFactrial(n - r) )
+ 
+def dxrange(start, end):
+    n = start
+    while True:
+        n += 1
+        yield n
+        if n >= end:
+            break
