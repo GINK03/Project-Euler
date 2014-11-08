@@ -1,4 +1,7 @@
 
+# this method return large prime list
+# there is a memory restriction, you can insert by 1000000, 
+# if you inserted 10000000, your machine will stop.because of memory overflow
 def primeTable(n):
     sieve = [True for _ in xrange(n + 1)]
     i = 2
@@ -20,7 +23,20 @@ def getFactrial(n):
 
 def getCombinationNum(n, r):
     return getFactrial(n)/( getFactrial(r)*getFactrial(n - r) )
- 
+
+# this method allow you to decompress specified number
+def primeDecomposition(n):
+  i = 2
+  table = []
+  while i * i <= n:
+    while n % i == 0:
+      n /= i
+      table.append(i)
+    i += 1
+  if n > 1:
+    table.append(n)
+  return table
+#method allow you to use decimal type iterator or huge number iterator 
 def dxrange(start, end):
     n = start
     while True:
