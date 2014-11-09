@@ -36,7 +36,7 @@ def primeDecomposition(n):
   if n > 1:
     table.append(n)
   return table
-#method allow you to use decimal type iterator or huge number iterator 
+# this method allow you to use decimal type iterator or huge number iterator 
 def dxrange(start, end):
     n = start
     while True:
@@ -44,3 +44,15 @@ def dxrange(start, end):
         yield n
         if n >= end:
             break
+
+def totientFunction(n, pSet):
+    if n in pSet:
+        return n-1
+    
+    res = primeDecomposition(n)
+    resset = set(res)
+    buff = 1.
+    for r in resset:
+        buff *= (1. - 1./r)
+    #print n, buff, buff*n, round(buff*n)
+    return int(round(buff*n))
