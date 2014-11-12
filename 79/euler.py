@@ -1,5 +1,4 @@
 import itertools, sys, os, math
-
 Keys = '''319
 680
 180
