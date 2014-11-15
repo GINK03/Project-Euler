@@ -1,25 +1,31 @@
 import itertools, sys
 sys.path.append('../pythonlib')
 import basic
-p = ['A', 'B', 'C', 'D']
-primeTable = basic.primeTable(100000)
-iteratePrimeTable = basic.primeTable(9999)
-result = []
-for i, pt in enumerate(itertools.combinations(iteratePrimeTable,5)):
-    if i%100000 == 0:
+primeTable = basic.primeTable(30000)
+primeLargeTable = set(basic.primeTable(10000000))
+temp_result = []
+for i, pt in enumerate(itertools.combinations(primeTable,2)):
+    if i%1000000 == 0:
         print 'iter', i, pt
-    #continue
-    #print pt
-    comb = True
-    for p in itertools.permutations(pt, 2):
-        to_eval = int(''.join(map(lambda x:str(x),p)))
-        if to_eval > primeTable[-1]:
-            comb = False
-            continue
-        if not to_eval in primeTable:
-            comb = False
-
-    if comb:
-        print pt, 'sum=', sum(pt)
-        result.append(pt)
-print sorted(result)
+    if all([int(''.join(s)) in primeLargeTable for s in itertools.permutations(map(str, list(pt)),2)]):
+        for p in primeTable:
+            if p in pt:
+                continue
+            pte = list(pt)
+            pte.append(p)
+            if all([int(''.join(s)) in primeLargeTable for s in itertools.permutations(map(str, pte),2)]):
+                for p in primeTable:
+                    if p in pte:
+                        continue
+                    pte2 = list(pte)
+                    pte2.append(p)
+                    if all([int(''.join(s)) in primeLargeTable for s in itertools.permutations(map(str, pte2),2)]):
+                        print 'maybe maybe result = ', pte2, sum(pte2)
+                        for p in primeTable:
+                            if p in pte2:
+                                continue
+                            pte3 = list(pte2)
+                            pte3.append(p)
+                            if all([int(''.join(s)) in primeLargeTable for s in itertools.permutations(map(str, pte3),2)]):
+                                print 'result = ', pte3, sum(pte3)
+                                sys.exit(0)
