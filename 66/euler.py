@@ -1,36 +1,41 @@
-import itertools, math
-#import numpy as np
-MAX_RANGE = 100000000
+import math, sys, os, itertools, operator
 
-global c
-c = 0
-def xp_generator():
-    global c
-    c = 2
+# check out this url
+# http://en.wikipedia.org/wiki/Diophantine_equation
+# and, check out this url here
+# http://techtipshoge.blogspot.jp/2014/10/blog-post.html
+def isEqual(D, p, q):
+    return p*p - D*q*q == 1
+
+def ak_generator(D):
+    p, q = 0, 1
+    x = int(D**0.5)
     while True:
-        yield c**2
-        c += 1
-if __name__ == '__main__':
-    #global c
-    D = [d for d in xrange(1,1001) if d != int(math.sqrt(d))**2]
-    #powlist = set([p**2 for p in xrange(1,MAX_RANGE)])
-    #np.dtype(np.int64)
-    #immutable_xp = np.array([x**2 for x in xrange(2,MAX_RANGE)])
-    #immutable_xp = [x**2 for x in xrange(2,MAX_RANGE)]
-    result_list = []
-    for d in D:
-        #for xp in np.nditer(immutable_xp, flags=['refs_ok']):
-        #for xp in immutable_xp:
-        for i, xp in enumerate(xp_generator()):
-            #if i%100000000 == 0:
-            #    print 'iter', i
-            yp = (xp - 1)/d
-            if (xp - 1)%d != 0 or not int(math.sqrt(yp))**2 == yp:
-                continue
-                #print 'itery',xp, yp, d
-            if xp - d*yp == 1:
-                print 'xp=', xp, 'yp=', yp,'d=', d
-                result_list.append( (xp, yp, d) )
-                c = 2
-                break
-    print sorted(result_list, key=lambda x:x[0]*(-1))
+        a = (x + p)/q
+        yield a
+        p = a*q - p
+        q = (D - p*p)/q
+    pass
+
+result = []
+for D in xrange(3,1001):
+    if int(math.sqrt(D))**2 == D:
+        continue
+    akgen = ak_generator(D)
+    ps = [0, 1]
+    qs = [1, 0]
+    
+    while True:
+        ak = akgen.next()
+        pnext = ak*ps[-1] + ps[-2]
+        qnext = ak*qs[-1] + qs[-2]
+        #qnext = (D - pnext ** 2)/qs[-1]
+        
+        if isEqual(D, pnext, qnext):
+            result.append( (D, pnext, qnext) )
+            break
+
+        ps.append(pnext)
+        qs.append(qnext)
+
+print 'ans', sorted(result, key=lambda x:x[1]).pop()
