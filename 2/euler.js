@@ -14,7 +14,7 @@ var fib = {
 
 var result = 0;
 while(true){
-  //console.log(fib.head, fib.tail);
+  //lconsole.log(fib.head, fib.tail);
   if(fib.head > MAX) break;
   if(fib.head%2 == 0) result += fib.head;
   fib.inc();

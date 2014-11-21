@@ -1,5 +1,4 @@
 # coding: utf-8
-
 class PrimeStack:
     def __init__(self):
         self.l = []
