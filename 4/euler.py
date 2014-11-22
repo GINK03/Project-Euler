@@ -12,8 +12,6 @@ def checkKaibun(e):
     asList = str(e[0] * e[1])
     isCorrespond = True
     i = 0
-    #if len(asList) % 2 != 0:
-    #    return None
 
     while i < len(asList)/1:
         if asList[i] != asList[(-1) * (i + 1) ]:
@@ -26,7 +24,5 @@ def checkKaibun(e):
 if __name__ == '__main__':
     baseList = range(100,999)
     for e in itertools.permutations(baseList, 2):
-        #e is a tuple
-        #print(e)
         checkKaibun(e)
     print(kaibuns.getMax())
