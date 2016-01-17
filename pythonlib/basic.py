@@ -37,7 +37,7 @@ def primeDecomposition(n):
     table.append(n)
   return table
 # this method allow you to use decimal type iterator or huge number iterator 
-def dxrange(start, end):
+def drange(start, end):
     n = start
     while True:
         n += 1
